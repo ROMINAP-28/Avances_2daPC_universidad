@@ -9,7 +9,7 @@ USE AdventureWorksDW2022
 --RIGHT JOIN 
 	SELECT FirstName,LastName FROM DimCustomer
 
-	RIGHT JOIN FactSurveyResponse ON DimCustomer.CustomerKey = FactSurveyResponse.SurveyResponseKey
+	RIGHT JOIN FactSurveyResponse ON DimCustomer.CustomerKey = FactSurveyResponse.CustomerKey
 
 
 --FULL JOIN 
