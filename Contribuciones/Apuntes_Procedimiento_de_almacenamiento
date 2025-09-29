@@ -1,0 +1,32 @@
+El procedimineto de almacenamiento es un conjunto de sentencias en SQL SERVER que van a cumplir ciertas funciones
+como es el agregar,modificar o eliminar datos de una base.
+Los procedimiento encapsulan estas consultas, lo que facilita la reutilización de codigo repetidas veces
+
+VENTAJAS DE SU USO:
+- Reutilización de código
+- Seguridad (puedes dar permisos solo para ejecutar el procedimiento, no para ver las tablas directamente)
+- Mantenimiento más fácil
+- Mejor rendimiento en algunas situaciones
+
+SINTAXIS: 
+
+CREATE PROCEDURE NombreDelProcedimiento
+    @Parametro1 TipoDato,
+    @Parametro2 TipoDato
+AS
+BEGIN
+    -- Instrucciones SQL aquí
+    SELECT * FROM Tabla WHERE Columna = @Parametro1;
+END
+
+EJEMPLO:
+CREATE PROCEDURE ObtenerClientesPorCiudad
+    @Ciudad NVARCHAR(100)
+AS
+BEGIN
+    SELECT Nombre, Ciudad
+    FROM Clientes
+    WHERE Ciudad = @Ciudad;
+END
+PARA EJECUTARLO :
+EXEC ObtenerClientesPorCiudad @Ciudad = 'Madrid';
