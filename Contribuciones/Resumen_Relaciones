@@ -1,0 +1,25 @@
+🔹 Relación uno a uno (1:1)
+
+Una relación uno a uno en SQL Server ocurre cuando una fila de una tabla está relacionada con solo una fila de otra tabla, y viceversa.
+Es decir, cada registro tiene un único registro asociado en la otra tabla.
+
+EJEMPLO:
+
+CREATE TABLE Persona (
+    PersonaID INT PRIMARY KEY,
+    Nombre NVARCHAR(50),
+    Apellido NVARCHAR(50)
+);
+
+CREATE TABLE Pasaporte (
+    PasaporteID INT PRIMARY KEY,
+    Numero NVARCHAR(20),
+    PersonaID INT UNIQUE,  -- 🔸 Clave foránea y única
+    FOREIGN KEY (PersonaID) REFERENCES Persona(PersonaID)
+);
+
+🔹 Claves importantes
+
+La clave primaria (PK) de la tabla principal se enlaza con una clave foránea (FK) en la otra tabla.
+
+Esa clave foránea debe tener una restricción UNIQUE, para asegurar que no haya más de una coincidencia (manteniendo la relación 1:1).
