@@ -1,0 +1,73 @@
+ Definición
+
+Una relación uno a muchos ocurre cuando un registro de una tabla (la tabla padre) puede estar asociado con muchos registros de otra tabla (la tabla hija), pero cada registro de la tabla hija solo puede relacionarse con un registro de la tabla padre.
+
+Se implementa usando claves primarias (PRIMARY KEY) y claves foráneas (FOREIGN KEY).
+
+Ejemplo:
+
+-- Tabla padre
+CREATE TABLE Clientes (
+    ClienteID INT PRIMARY KEY,
+    Nombre NVARCHAR(100),
+    Ciudad NVARCHAR(100)
+);
+
+-- Tabla hija
+CREATE TABLE Pedidos (
+    PedidoID INT PRIMARY KEY,
+    Fecha DATE,
+    Monto DECIMAL(10,2),
+    ClienteID INT,  -- clave foránea
+
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+);
+
+🔸 Aquí:
+
+Clientes es la tabla padre.
+
+Pedidos es la tabla hija.
+
+ClienteID en Pedidos es una clave foránea que apunta al ClienteID de Clientes.
+
+
+
+---
+
+Ejemplo de datos
+
+INSERT INTO Clientes VALUES (1, 'Romina Paredes', 'Arequipa');
+INSERT INTO Clientes VALUES (2, 'Luis García', 'Lima');
+
+INSERT INTO Pedidos VALUES (101, '2025-10-06', 250.00, 1);
+INSERT INTO Pedidos VALUES (102, '2025-10-07', 150.00, 1);
+INSERT INTO Pedidos VALUES (103, '2025-10-07', 300.00, 2);
+
+➡️ En este caso:
+
+Romina (ClienteID = 1) tiene 2 pedidos.
+
+Luis (ClienteID = 2) tiene 1 pedido.
+---
+Cómo consultar la relación
+
+Para ver los datos relacionados:
+
+SELECT 
+    C.Nombre,
+    P.PedidoID,
+    P.Monto
+FROM Clientes C
+JOIN Pedidos P ON C.ClienteID = P.ClienteID;
+
+Resultado:
+
+Nombre	PedidoID	Monto
+
+Romina Paredes	101	250.00
+Romina Paredes	102	150.00
+Luis García	103	300.00
+
+
+
