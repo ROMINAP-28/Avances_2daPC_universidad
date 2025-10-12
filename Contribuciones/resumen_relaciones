@@ -1,73 +1,25 @@
- Definición
+🔹 Relación uno a uno (1:1)
 
-Una relación uno a muchos ocurre cuando un registro de una tabla (la tabla padre) puede estar asociado con muchos registros de otra tabla (la tabla hija), pero cada registro de la tabla hija solo puede relacionarse con un registro de la tabla padre.
+Una relación uno a uno en SQL Server ocurre cuando una fila de una tabla está relacionada con solo una fila de otra tabla, y viceversa.
+Es decir, cada registro tiene un único registro asociado en la otra tabla.
 
-Se implementa usando claves primarias (PRIMARY KEY) y claves foráneas (FOREIGN KEY).
+EJEMPLO:
 
-Ejemplo:
-
--- Tabla padre
-CREATE TABLE Clientes (
-    ClienteID INT PRIMARY KEY,
-    Nombre NVARCHAR(100),
-    Ciudad NVARCHAR(100)
+CREATE TABLE Persona (
+    PersonaID INT PRIMARY KEY,
+    Nombre NVARCHAR(50),
+    Apellido NVARCHAR(50)
 );
 
--- Tabla hija
-CREATE TABLE Pedidos (
-    PedidoID INT PRIMARY KEY,
-    Fecha DATE,
-    Monto DECIMAL(10,2),
-    ClienteID INT,  -- clave foránea
-
-    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+CREATE TABLE Pasaporte (
+    PasaporteID INT PRIMARY KEY,
+    Numero NVARCHAR(20),
+    PersonaID INT UNIQUE,  -- 🔸 Clave foránea y única
+    FOREIGN KEY (PersonaID) REFERENCES Persona(PersonaID)
 );
 
-🔸 Aquí:
+🔹 Claves importantes
 
-Clientes es la tabla padre.
+La clave primaria (PK) de la tabla principal se enlaza con una clave foránea (FK) en la otra tabla.
 
-Pedidos es la tabla hija.
-
-ClienteID en Pedidos es una clave foránea que apunta al ClienteID de Clientes.
-
-
-
----
-
-Ejemplo de datos
-
-INSERT INTO Clientes VALUES (1, 'Romina Paredes', 'Arequipa');
-INSERT INTO Clientes VALUES (2, 'Luis García', 'Lima');
-
-INSERT INTO Pedidos VALUES (101, '2025-10-06', 250.00, 1);
-INSERT INTO Pedidos VALUES (102, '2025-10-07', 150.00, 1);
-INSERT INTO Pedidos VALUES (103, '2025-10-07', 300.00, 2);
-
-➡️ En este caso:
-
-Romina (ClienteID = 1) tiene 2 pedidos.
-
-Luis (ClienteID = 2) tiene 1 pedido.
----
-Cómo consultar la relación
-
-Para ver los datos relacionados:
-
-SELECT 
-    C.Nombre,
-    P.PedidoID,
-    P.Monto
-FROM Clientes C
-JOIN Pedidos P ON C.ClienteID = P.ClienteID;
-
-Resultado:
-
-Nombre	PedidoID	Monto
-
-Romina Paredes	101	250.00
-Romina Paredes	102	150.00
-Luis García	103	300.00
-
-
-
+Esa clave foránea debe tener una restricción UNIQUE, para asegurar que no haya más de una coincidencia (manteniendo la relación 1:1).
