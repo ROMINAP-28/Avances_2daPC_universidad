@@ -1,0 +1,29 @@
+----RELACIÓN DE MUCHOS A MUCHOS------------------------------------------------------------------
+En SQL Server (y en bases de datos relacionales en general), una relación de muchos a muchos (N:M) 
+ocurre cuando una fila de una tabla puede relacionarse con varias filas de otra tabla, y viceversa.
+
+Como las bases de datos relacionales no permiten directamente relaciones N:M,
+se usa una tabla intermedia (o tabla puente) que conecta ambas tablas principales mediante claves foráneas (foreign keys).
+
+EJEMPLO----------------------------
+-- Tabla principal 1
+CREATE TABLE Estudiantes (
+    IdEstudiante INT PRIMARY KEY,
+    Nombre VARCHAR(50)
+);
+
+-- Tabla principal 2
+CREATE TABLE Cursos (
+    IdCurso INT PRIMARY KEY,
+    NombreCurso VARCHAR(50)
+);
+
+-- Tabla intermedia (relación muchos a muchos)
+CREATE TABLE EstudianteCurso (
+    IdEstudiante INT,
+    IdCurso INT,
+    FechaMatricula DATE,
+    PRIMARY KEY (IdEstudiante, IdCurso),
+    FOREIGN KEY (IdEstudiante) REFERENCES Estudiantes(IdEstudiante),
+    FOREIGN KEY (IdCurso) REFERENCES Cursos(IdCurso)
+);
