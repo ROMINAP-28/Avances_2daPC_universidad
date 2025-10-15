@@ -1,0 +1,11 @@
+-------¿Que es una funcion de agregación?
+Las funciones agregadas en SQL Server se usan para realizar cálculos sobre un conjunto 
+de valores (por ejemplo, todas las filas de una columna) y devolver un solo valor como resultado.
+-------PRINCIPALES FUNCIONES-----------------
+| Función       | Descripción                                                             | Ejemplo                               |
+| ------------- | ----------------------------------------------------------------------- | ------------------------------------- |
+| *SUM()  | Devuelve la **suma total** de los valores numéricos de una columna.     | `SELECT SUM(Salario) FROM Empleados;` |
+| AVG()   | Calcula el **promedio** de los valores numéricos.                       | `SELECT AVG(Edad) FROM Personas;`     |
+| COUNT() | Cuenta el **número de filas** (puede contar todas o solo las no nulas). | `SELECT COUNT(*) FROM Ventas;`        |
+| **MAX() | Devuelve el **valor máximo** de una columna.                            | `SELECT MAX(Precio) FROM Productos;`  |
+| *MIN()  | Devuelve el **valor mínimo** de una columna.                            | `SELECT MIN(Precio) FROM Productos;`  |
