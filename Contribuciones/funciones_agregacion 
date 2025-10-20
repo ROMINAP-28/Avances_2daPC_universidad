@@ -1,0 +1,11 @@
+FUNCIONES DE AGREGACIÓN:
+
+COUNT() Cuenta el número de filas en un conjunto. 
+
+SUM() Calcula la suma de los valores de una columna numérica. 
+
+AVG() Calcula el valor promedio (media) de una columna numérica.
+
+MIN() Encuentra el valor mínimo de una columna (numérica, de texto o fecha).
+
+MAX() Encuentra el valor máximo de una columna (numérica, de texto o fecha).
